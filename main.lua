@@ -12,6 +12,8 @@ require 'states.game'
 
 -- entities
 require 'entities.map'
+require 'entities.player'
+require 'entities.enemy'
 
 function love.load()
 	love.window.setTitle(config.windowTitle)
