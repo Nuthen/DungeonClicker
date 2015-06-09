@@ -33,7 +33,11 @@ function Map:update(dt)
 	t = t+dt
 	if t > .5 then
 		--t = 0
-		self:generate()
+		if #self.cells > 0 then
+			--for i = 1, 5 do
+				self:generate()
+			--end
+		end
 	end
 end
 
@@ -47,6 +51,24 @@ function Map:getIndex(cellCount)
 		index = math.random(cellCount)
 	elseif self.search == 4 then -- searches in the middle
 		index = math.ceil(cellCount/2)
+	elseif self.search == 5 then -- picks between oldest and newest
+		local chance = math.random(2)
+		if chance == 1 then
+			index = 1
+		else
+			index = cellCount
+		end
+	elseif self.search == 6 then -- picks between oldest, newest, middle, random
+		local chance = math.random(4)
+		if chance == 1 then
+			index = 1
+		elseif chance == 2 then
+			index = math.ceil(cellCount/2)
+		elseif chance == 3 then
+			index = cellCount
+		else
+			index = math.random(cellCount)
+		end
 	end
 	
 	return index
@@ -54,7 +76,7 @@ end
 
 function Map:keypressed(key)
 	local number = tonumber(key)
-	if number and number <= 4 then
+	if number and number <= 6 then
 		self.search = number
 		
 		self:start()
@@ -130,7 +152,7 @@ end
 
 function Map:draw()
 	local width, height = self.width, self.height
-	local w, h = 16, 16
+	local w, h = 64, 64
 	
 	for iy = 1, height do
 		for ix = 1, width do

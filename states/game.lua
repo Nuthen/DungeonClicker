@@ -3,7 +3,7 @@ game = {}
 function game:enter()
 	love.graphics.setBackgroundColor(186, 222, 208)
 
-    self.map = Map:new(40, 40)
+    self.map = Map:new(10, 10)
 end
 
 function game:update(dt)
