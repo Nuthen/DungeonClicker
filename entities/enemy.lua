@@ -8,7 +8,7 @@ function Enemy:spawn()
 	self.maxHealth = math.random(2, 6) * game.player.level
 	self.health = self.maxHealth
 	self.damage = 2 * game.player.level
-	self.defense = game.player.level
+	self.defense = 0
 	self.exp = math.random(1, 3) * game.player.level
 	self.name = 'ugly square'
 	self.alive = true
